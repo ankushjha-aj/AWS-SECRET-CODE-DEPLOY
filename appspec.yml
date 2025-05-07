@@ -1,0 +1,12 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /home/ubuntu/myapp
+
+hooks:
+  AfterInstall:
+    - location: scripts/create_env_from_secret.sh
+      timeout: 60
+      runas: ubuntu
