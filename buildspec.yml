@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    commands:
+      - echo Installing AWS CLI...
+      - yum install -y aws-cli jq
+  build:
+    commands:
+      - echo Fetching secret from Secrets Manager...
+      - aws secretsmanager get-secret-value \
+          --region us-east-1 \
+          --secret-id my-app-env-secret \
+          --query SecretString \
+          --output text > .env
+      - echo Secret written to .env
+
+artifacts:
+  files:
+    - '**/*'
