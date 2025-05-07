@@ -1,9 +1,9 @@
 #!/bin/bash
-# Create application directory if it doesn't exist
-if [ ! -d /home/ubuntu/myapp ]; then
-  mkdir -p /home/ubuntu/myapp
+# Create destination directory if it doesn't exist
+if [ ! -d /var/www/html ]; then
+  mkdir -p /var/www/html
 fi
 
-# Set proper ownership and permissions
-chown -R ubuntu:ubuntu /home/ubuntu/myapp
-chmod -R 755 /home/ubuntu/myapp 
+# Set proper permissions
+chown -R www-data:www-data /var/www/html
+chmod -R 755 /var/www/html 

@@ -3,29 +3,16 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 16
-    commands:
-      - echo Installing dependencies...
-      - npm install -g aws-cli
-  pre_build:
-    commands:
-      - echo Fetching secret from Secrets Manager...
-      - aws secretsmanager get-secret-value --region us-east-1 --secret-id my-app-env-secret --query SecretString --output text > .env || echo "Failed to fetch secret, deployment will continue"
-      - echo Secret written to .env
+      python: 3.9
   build:
     commands:
       - echo Setting file permissions...
       - chmod +x scripts/*.sh
-      - echo Building the application...
-      - npm install || echo "No package.json found, skipping npm install"
+      - echo Build completed...
 
 artifacts:
   files:
     - appspec.yml
-    - scripts/**/*
-    - src/**/*
-    - .env
-    - package.json
-    - package-lock.json
-    - '**/*'
+    - scripts/before_install.sh
+    - index.html
   discard-paths: no
